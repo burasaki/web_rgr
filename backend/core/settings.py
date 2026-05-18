@@ -33,7 +33,8 @@ CSRF_COOKIE_SECURE = True
 
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.render.com', 'web-rgr.onrender.com']
-CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     'https://web-rgr.onrender.com',
     'https://*.render.com',
