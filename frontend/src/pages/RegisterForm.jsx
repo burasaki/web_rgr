@@ -31,7 +31,7 @@ export const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch('/api/auth/register/', {
+      const response = await fetch('https://onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

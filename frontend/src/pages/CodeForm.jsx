@@ -16,7 +16,7 @@ export const CodeForm = () => {
     }
 
     try {
-      const response = await fetch('/api/auth/code/', {
+      const response = await fetch('https://onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

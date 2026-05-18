@@ -23,7 +23,7 @@ export const MainWebinar = () => {
   }, [user]);
 
   useEffect(() => {
-    fetch('/api/chat/history/')
+    fetch('https://onrender.com')
       .then(res => res.json())
       .then(data => setMessages(data))
       .catch(err => console.error("Ошибка загрузки истории чата:", err));
@@ -31,7 +31,7 @@ export const MainWebinar = () => {
 
   useEffect(() => {
     const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-    socket.current = new WebSocket(`${wsProtocol}${window.location.host}/ws/chat/`);
+    socket.current = new WebSocket('wss://://onrender.com');
 
     socket.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -79,7 +79,7 @@ export const MainWebinar = () => {
   const handleSaveChatName = async () => {
     if (!newChatName.trim()) return;
     try {
-      const res = await fetch('/api/auth/user/update/', {
+      const res = await fetch('https://onrender.com', {
         method: 'PATCH',
         headers: { 
           'Content-Type': 'application/json', 
@@ -145,7 +145,7 @@ export const MainWebinar = () => {
             <div className={styles.videoWrapper}>
               <video 
                 className={styles.videoPlayer} 
-                src="/api/video/stream/1/" 
+                src="https://onrender.com"
                 poster="/poster2x.png"
                 controls
                 autoPlay
