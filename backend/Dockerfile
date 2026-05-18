@@ -7,4 +7,6 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 EXPOSE 10000
 
-CMD python manage.py migrate --noinput && python create_admin.py && daphne -b 0.0.0.0 -p 10000 core.asgi:application
+CMD python manage.py migrate --noinput && \
+    python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(email='a@a.com').exists() or User.objects.create_superuser('a@a.com', 'a@a.com', 'a', first_name='Администратор')" && \
+    daphne -b 0.0.0.0 -p 10000 core.asgi:application
