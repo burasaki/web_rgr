@@ -29,7 +29,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.render.com', 'web-rgr.onrender.com']
 CORS_ALLOW_ALL_ORIGINS = True 
-CSRF_TRUSTED_ORIGINS = ['https://*.render.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-rgr.onrender.com',
+    'https://*.render.com',
+    ]
 
 # Application definition
 
