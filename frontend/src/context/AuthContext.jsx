@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       localStorage.setItem('token', token);
       
-      fetch('https://onrender.com', { 
+      fetch('https://web-rgr.onrender.com', { 
         headers: { 'Authorization': `Bearer ${token}` } 
       })
         .then(res => {
