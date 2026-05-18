@@ -7,4 +7,4 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 EXPOSE 10000
 
-CMD python manage.py migrate --noinput && daphne -b 0.0.0.0 -p 10000 core.asgi:application
+CMD python manage.py migrate --noinput && python create_admin.py && daphne -b 0.0.0.0 -p 10000 core.asgi:application
