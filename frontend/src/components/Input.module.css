@@ -1,0 +1,44 @@
+.fieldContainer {
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+}
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1A1A;
+  margin-bottom: 8px;
+}
+.required { color: #EC1C24; margin-left: 4px; }
+.inputWrapper { position: relative; display: flex; align-items: center; }
+.input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background-color: #F0F2F8;
+  font-size: 16px;
+  color: #1A1A1A;
+  transition: all 0.2s ease;
+}
+.input::placeholder { color: #B3B9C9; }
+.input:focus {
+  outline: none;
+  background-color: #E2E6F2;
+  border-color: #2F394E;
+}
+.errorInput {
+  border-color: #EC1C24 !important;
+  background-color: #FFF2F2 !important;
+}
+.errorText {
+  color: #EC1C24;
+  font-size: 12px;
+  margin-top: 6px;
+}
+.asteriskIcon {
+  position: absolute;
+  right: 16px;
+  color: #B3B9C9;
+}
+.errorInput ~ .asteriskIcon { color: #EC1C24; }

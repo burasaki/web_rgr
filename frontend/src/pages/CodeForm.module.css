@@ -1,0 +1,143 @@
+.authBackground {
+  min-height: 100vh;
+  width: 100vw;
+  background: url('/background2x.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Логотип строго в левом верхнем углу */
+.logoHeader {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.mainLogo {
+  height: 44px;
+  width: auto;
+}
+
+/* Табы над карточкой */
+.tabContainer {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.activeTab, .inactiveTab {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding-bottom: 8px;
+  transition: opacity 0.2s;
+}
+
+.activeTab {
+  border-bottom: 2px solid #FFFFFF;
+  font-weight: 600;
+}
+
+.inactiveTab {
+  opacity: 0.5;
+}
+
+.inactiveTab:hover {
+  opacity: 0.8;
+}
+
+/* Компактная белая карточка по центру макета */
+.authCard {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.fieldContainer {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1A1A;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  background-color: #F8FAFC;
+  font-size: 14px;
+  color: #1A1A1A;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.input::placeholder {
+  color: #CBD5E1;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1D3196;
+  background-color: #FFFFFF;
+}
+
+.errorInput {
+  border-color: #EF4444;
+  background-color: #FEF2F2;
+}
+
+.errorText {
+  color: #EF4444;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.successText {
+  color: #10B981;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Кнопка «Отправить код» */
+.submitBtn {
+  width: 100%;
+  background-color: #1D3196;
+  color: #FFFFFF;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitBtn:hover {
+  background-color: #14226D;
+}
