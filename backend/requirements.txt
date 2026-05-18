@@ -3,3 +3,5 @@ djangorestframework>=3.15.0
 djangorestframework-simplejwt>=5.3.0
 django-cors-headers>=4.3.0
 channels[daphne]>=4.0.0
+
+whitenoise[brotli]>=6.6.0
