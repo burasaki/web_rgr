@@ -27,11 +27,18 @@ SECRET_KEY = 'django-insecure-4h69n9k_co315yaa!78(^onpav*-&os74)3mwo+z4!*(k9bsx*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.render.com', 'web-rgr.onrender.com']
 CORS_ALLOW_ALL_ORIGINS = True 
 CSRF_TRUSTED_ORIGINS = [
     'https://web-rgr.onrender.com',
     'https://*.render.com',
+    'https://onrender.com',
+    'https://*.onrender.com',
     ]
 
 # Application definition
