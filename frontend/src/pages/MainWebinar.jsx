@@ -31,7 +31,7 @@ export const MainWebinar = () => {
 
   useEffect(() => {
     const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-    socket.current = new WebSocket('wss://://web-rgr.onrender.com');
+    socket.current = new WebSocket('wss://web-rgr.onrender.com');
 
     socket.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -146,7 +146,6 @@ export const MainWebinar = () => {
               <video 
                 className={styles.videoPlayer} 
                 src="https://web-rgr.onrender.com"
-                poster="/poster2x.png"
                 controls
                 autoPlay
                 muted
