@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import styles from './MainWebinar.module.css';
 
+const BASE_URL = 'https://web-rgr.onrender.com/api';
+const WS_URL = 'wss://web-rgr.onrender.com/ws/chat/'; // Согласно routing в asgi.py
+
 export const MainWebinar = () => {
   const { user, token, logout, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,16 +25,17 @@ export const MainWebinar = () => {
     }
   }, [user]);
 
+  // Загрузка истории
   useEffect(() => {
-    fetch('https://web-rgr.onrender.com')
+    fetch(`${BASE_URL}/chat/history/`)
       .then(res => res.json())
       .then(data => setMessages(data))
       .catch(err => console.error("Ошибка загрузки истории чата:", err));
   }, []);
 
+  // Подключение WebSocket
   useEffect(() => {
-    const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-    socket.current = new WebSocket('wss://web-rgr.onrender.com');
+    socket.current = new WebSocket(WS_URL);
 
     socket.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -79,7 +83,7 @@ export const MainWebinar = () => {
   const handleSaveChatName = async () => {
     if (!newChatName.trim()) return;
     try {
-      const res = await fetch('https://web-rgr.onrender.com', {
+      const res = await fetch(`${BASE_URL}/auth/user/update/`, {
         method: 'PATCH',
         headers: { 
           'Content-Type': 'application/json', 
@@ -112,14 +116,14 @@ export const MainWebinar = () => {
             <>
               <span className={styles.userName}>{user.first_name || 'Пользователь'}</span>
               <button className={styles.profileBtn}>
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://w3.org" className={styles.profileSvg}>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org" className={styles.profileSvg}>
                   <circle cx="16" cy="16" r="15" stroke="white" strokeWidth="2"/>
                   <circle cx="16" cy="13" r="5" stroke="white" strokeWidth="2"/>
                   <path d="M7 26C8.5 21.5 12 19 16 19C20 19 23.5 21.5 25 26" stroke="white" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </button>
               <button onClick={logout} className={styles.logoutBtn} title="Выйти">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org">
                   <path d="M17 16L21 12M21 12L17 8M21 12H9M13 16V17C13 18.6569 11.6569 20 10 20H5C3.34315 20 2 18.6569 2 17V7C2 5.34315 3.34315 4 5 4H10C11.6569 4 13 5.34315 13 7V8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
@@ -128,7 +132,7 @@ export const MainWebinar = () => {
             <>
               <span className={styles.userName} onClick={() => navigate('/register')}>Регистрация</span>
               <button className={styles.profileBtn} onClick={() => navigate('/register')}>
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://w3.org" className={styles.profileSvg}>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org" className={styles.profileSvg}>
                   <circle cx="16" cy="16" r="15" stroke="white" strokeWidth="2"/>
                   <circle cx="16" cy="13" r="5" stroke="white" strokeWidth="2"/>
                   <path d="M7 26C8.5 21.5 12 19 16 19C20 19 23.5 21.5 25 26" stroke="white" strokeWidth="2" strokeLinecap="round"/>
@@ -143,9 +147,10 @@ export const MainWebinar = () => {
         <div className={styles.dashboardLayout}>
           <div className={styles.videoSection}>
             <div className={styles.videoWrapper}>
+              {/* Запрашиваем потоковое видео с ID = 1 */}
               <video 
                 className={styles.videoPlayer} 
-                src="https://web-rgr.onrender.com"
+                src={`${BASE_URL}/video/stream/1/`}
                 controls
                 autoPlay
                 muted

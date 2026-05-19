@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CodeForm.module.css';
 
+const BASE_URL = 'https://web-rgr.onrender.com/api';
+
 export const CodeForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -16,7 +18,8 @@ export const CodeForm = () => {
     }
 
     try {
-      const response = await fetch('https://onrender.com', {
+      // Когда создадите на бэкенде эндпоинт для кодов, замените /auth/login/ на нужный путь
+      const response = await fetch(`${BASE_URL}/auth/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -36,20 +39,16 @@ export const CodeForm = () => {
 
   return (
     <div className={styles.authBackground}>
-      {/* Логотип в левом верхнем углу */}
       <div className={styles.logoHeader}>
         <img src="/logo.svg" alt="YADRO" className={styles.mainLogo} />
       </div>
 
-      {/* Переключатель вкладок по центру */}
       <div className={styles.tabContainer}>
         <button className={styles.inactiveTab} onClick={() => navigate('/register')}>Регистрация</button>
         <button className={styles.activeTab}>Код доступа</button>
         <button className={styles.inactiveTab} onClick={() => navigate('/login')}>Вход</button>
       </div>
 
-
-      {/* Белая карточка формы */}
       <div className={styles.authCard}>
         <form onSubmit={handleSubmit}>
           <div className={styles.fieldContainer}>

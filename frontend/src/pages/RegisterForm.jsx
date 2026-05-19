@@ -4,23 +4,21 @@ import { AuthContext } from '../context/AuthContext';
 import { Input } from '../components/Input';
 import styles from './RegisterForm.module.css';
 
+const BASE_URL = 'https://web-rgr.onrender.com/api';
+
 export const RegisterForm = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   
-  // Состояния для полей формы
   const [email, setEmail] = useState('');
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
-  
-  // Состояния для ошибок валидации
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
-    // Валидация на фронтенде перед отправкой (Страница 12)
     if (!email) newErrors.email = 'Электронная почта обязательна для заполнения';
     if (!lastName) newErrors.lastName = 'Поле, обязательное для заполнения';
     if (!firstName) newErrors.firstName = 'Поле, обязательное для заполнения';
@@ -31,27 +29,35 @@ export const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch('https://web-rgr.onrender.com/ws/chat/', {
+      const response = await fetch(`${BASE_URL}/auth/register/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
           last_name: lastName,
           first_name: firstName,
-          username: email // Автоматический username для Django
+          username: email 
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Сохраняем полученный JWT токен и перенаправляем на главную
         if (data.token) {
           login(data.token, data.user);
           navigate('/');
+        } else {
+          // Если бэкенд не возвращает токен сразу при регистрации, отправляем на вход
+          navigate('/login');
         }
       } else {
         const errorData = await response.json();
-        setErrors({ server: errorData.detail || 'Ошибка регистрации' });
+        if (errorData.detail) {
+          setErrors({ server: errorData.detail });
+        } else {
+          // Извлекаем первую ошибку валидации от Django (например, если email уже занят)
+          const firstError = Object.values(errorData)[0];
+          setErrors({ server: Array.isArray(firstError) ? firstError[0] : 'Ошибка регистрации' });
+        }
       }
     } catch (err) {
       setErrors({ server: 'Не удалось связаться с сервером' });
@@ -67,7 +73,7 @@ export const RegisterForm = () => {
       <div className={styles.tabContainer}>
         <button className={styles.activeTab}>Регистрация</button>
         <button className={styles.inactiveTab} onClick={() => navigate('/code')}>Код доступа</button>
-        <button className={styles.inactiveTab} onClick={() => navigate('/login')}>Вход</button> {/* Третья кнопка */}
+        <button className={styles.inactiveTab} onClick={() => navigate('/login')}>Вход</button>
       </div>
 
       <div className={styles.authCard}>

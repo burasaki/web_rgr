@@ -32,15 +32,28 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com', 'web-rgr.onrender.com']
-CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1', 
+    '.onrender.com', 
+    'web-rgr.onrender.com'
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    'https://web-rgr.vercel.app',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+
 CORS_ALLOW_CREDENTIALS = True
+
 CSRF_TRUSTED_ORIGINS = [
+    'https://web-rgr.vercel.app',
     'https://web-rgr.onrender.com',
     'https://*.render.com',
-    'https://onrender.com',
-    'https://*.onrender.com',
-    ]
+]
 
 # Application definition
 
@@ -153,4 +166,3 @@ CHANNEL_LAYERS = {
 }
 
 MEDIA_ROOT = BASE_DIR / 'media'
-BASE_DIR = Path(__file__).resolve().parent.parent

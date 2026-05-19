@@ -2,7 +2,9 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Input } from '../components/Input';
-import styles from './RegisterForm.module.css'; // Используем уже готовые стили от регистрации
+import styles from './RegisterForm.module.css';
+
+const BASE_URL = 'https://web-rgr.onrender.com/api';
 
 export const LoginForm = () => {
   const { login } = useContext(AuthContext);
@@ -13,12 +15,12 @@ export const LoginForm = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     if (!email) {
-      setError('Электронная почта обязательна для входа');
+      setError('Электронная почта обязательна для進入а');
       return;
     }
 
     try {
-      const response = await fetch('https://onrender.com', {
+      const response = await fetch(`${BASE_URL}/auth/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -28,7 +30,7 @@ export const LoginForm = () => {
         const data = await response.json();
         if (data.token) {
           login(data.token, data.user);
-          navigate('/'); // Перенаправляем на главный экран вебинара
+          navigate('/'); 
         }
       } else {
         const errorData = await response.json();
@@ -45,7 +47,6 @@ export const LoginForm = () => {
         <img src="/logo.svg" alt="YADRO" className={styles.logoImg} />
       </div>
 
-      {/* Панель вкладок с активной кнопкой "Вход" */}
       <div className={styles.tabContainer}>
         <button className={styles.inactiveTab} onClick={() => navigate('/register')}>Регистрация</button>
         <button className={styles.inactiveTab} onClick={() => navigate('/code')}>Код доступа</button>
