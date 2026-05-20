@@ -1,7 +1,7 @@
 # РГЗ по теме: «Создание тестовой видеоплатформы с использованием технологий Python для бэкенда, React JS для фронтенда и Figma для дизайна»
 
 
-* **Frontend (Vercel):** [https://web-rgr.vercel.app](https://web-rgr.vercel.app)
+* **Ссылка на сайт** [https://web-rgr.vercel.app](https://web-rgr.vercel.app)
 
 ## Cтек
 
